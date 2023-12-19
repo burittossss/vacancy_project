@@ -1,0 +1,46 @@
+
+<%= form_with model: vacancy, local: true, data: { controller: "places", action: "google-maps-callback@window->places#initMap", places_latitude: vacancy.latitude, places_longitude: vacancy.longitude }, class: "form bg-red-500" do |form| %>
+  <div class="mb-6">
+    <%= form.label :position, class: "form-label" %>
+    <%= form.text_field :position, class: 'form-input' %>
+  </div>
+
+  <div class="mb-6">
+    <%= form.label :location %>
+    <%= form.search_field :location, class: 'form-input', data: { target: "places.field", action: "keydown->places#keydown" } %>
+  </div>
+
+  <div class="mb-6">
+    <%= form.hidden_field :latitude, class: 'form-input', data: { target: "places.latitude" } %>
+  </div>
+
+  <div class="mb-6">
+    <%= form.hidden_field :longitude, class: 'form-input', data: { target: "places.longitude" } %>
+  </div>
+
+  <div class="mb-6">
+    <%= form.label :description, class: "form-label" %>
+    <%= form.text_area :description, class: 'form-input' %>
+  </div>
+
+  <div class="mb-6">
+    <%= form.label :company, class: "form-label" %>
+    <%= form.text_field :company, class: 'form-input' %>
+  </div>
+
+  <div class="mb-6">
+    <%= form.file_field :logo, accept: "image/png, image/gif, image/jpeg", class: 'form-input' %>
+  </div>
+
+  <div class="mb-6">
+    <%= form.label :salary, class: "form-label" %>
+    <%= form.text_field :salary, min: 0.01, class: "form-input w-32" %>
+  </div>
+
+  <div class="p-4">
+    <div data-target="places.map" class="w-full h-[400px]"></div>
+  </div>
+
+  <%= form.submit "Додати", class: "btn-success" %>
+
+<% end %>
